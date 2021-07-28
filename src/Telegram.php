@@ -535,13 +535,13 @@ class Telegram
      *
      * @throws TelegramException
      */
-    public function handle(): bool
+    public function handle($request = false): bool
     {
         if ($this->bot_username === '') {
             throw new TelegramException('Bot Username is not defined!');
         }
 
-        $input = Request::getInput();
+        $input = $request ? $request : Request::getInput();
         if (empty($input)) {
             throw new TelegramException('Input is empty! The webhook must not be called manually, only by Telegram.');
         }
